@@ -18,7 +18,7 @@ def readValueToString(input):
         return "0"
 
 inPin = 40
-GPIO.setup(inPin, GPIO.IN)
+GPIO.setup(inPin, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 lightPin = 38
 GPIO.setup(lightPin, GPIO.OUT)
 light = False
@@ -38,7 +38,7 @@ try:
             GPIO.output(lightPin, GPIO.LOW)
         print(readValueToString(readVal) +" "+  boolToStr(light))
         
-        sleep(1)
+        sleep(0.05)
 except KeyboardInterrupt: 
     GPIO.cleanup()
     print("ending...")
