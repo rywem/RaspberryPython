@@ -22,6 +22,8 @@ GPIO.setup(inPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 lightPin = 38
 GPIO.setup(lightPin, GPIO.OUT)
 light = False
+buttonState = 0
+buttonStateOld = 0
 try:
     while True:        
         readVal = GPIO.input(inPin) #read the value from the 40
