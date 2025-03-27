@@ -13,12 +13,13 @@ try:
     sleep(.1)
     myPWM = GPIO.PWM(37, 100) #frequency
     myPWM.start(10) #duty cycle in %
-    myPWM.ChangeDutyCycle(75)
+    #myPWM.ChangeDutyCycle(50)
+    myPWM.ChangeFrequency(10)
     
     #while True:
      #   GPIO.output(37, True)
     sleep(2)
-    myPWM.stop(10)
+    myPWM.stop()
 except KeyboardInterrupt:
     GPIO.cleanup()
     print("cleanup complete")
