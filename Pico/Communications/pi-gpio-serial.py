@@ -1,43 +1,29 @@
 import RPi.GPIO as GPIO
 from time import sleep
+
+# Use physical pin numbering
 GPIO.setmode(GPIO.BOARD)
-outPiToPico = 37
-inPiFromPico = 33
-button1 = 40
-button2 = 38
-#dimmerButtonPin = 40
-#brightButtonPin = 38
-GPIO.setup(outPiToPico, GPIO.OUT)
+
+# === Pin assignments (based on your setup) ===
+outPiFToPico = 37     # GPIO 26 (output TO Pico)
+inPiFromPico = 33     # GPIO 13 (input FROM Pico)
+button1 = 40          # GPIO 21
+button2 = 38          # GPIO 20
+
+# === Setup GPIO pins ===
 GPIO.setup(button1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(button2, GPIO.IN,pull_up_down=GPIO.PUD_UP)
+GPIO.setup(button2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
+# === Main loop ===
+print("Watching buttons. Press Ctrl+C to exit.")
 
-# 
-# incrementValue = 15
-# lightValue = 50
-# lightValueOld = lightValue
-# myPWM = GPIO.PWM(ledPin, 100) #frequency
-# myPWM.start(lightValue)
-# try:
-#     while True:
-#         dimmerReadVal = GPIO.input(dimmerButtonPin)
-#         brightReadVal = GPIO.input(brightButtonPin)
-#         
-#         if dimmerReadVal == 1:
-#             lightValue = lightValue - incrementValue
-#         if brightReadVal == 1:
-#             lightValue = lightValue + incrementValue
-#         if lightValue > 100:
-#             lightValue = 99
-#         if lightValue < 0:
-#             lightValue = 1
-#         if lightValueOld != lightValue:                
-#             myPWM.ChangeDutyCycle(lightValue)
-#             lightValueOld = lightValue
-#         print(lightValue)
-#         #myPWM.start(10) #duty cycle in %
-#             
-#         sleep(.1)
-# except KeyboardInterrupt:
-#     GPIO.cleanup()
-#     print("cleaned and exited")
+try:
+    while True:
+        if GPIO.input(button1) == GPIO.LOW:
+            print("Button 1 pressed!")
+        if GPIO.input(button2) == GPIO.LOW:
+            print("Button 2 pressed!")
+        sleep(0.1)  # debounce time
+except KeyboardInterrupt:
+    GPIO.cleanup()
+    print("Cleaned up GPIO and exited.")
