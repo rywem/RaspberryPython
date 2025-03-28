@@ -8,7 +8,7 @@ outPiFToPico = 37     # GPIO 26 (output TO Pico)
 inPiFromPico = 33     # GPIO 13 (input FROM Pico)
 button1 = 40          # GPIO 21
 button2 = 38          # GPIO 20
-
+ledOnPi = 36 # GPIO 16
 # === Setup pins ===
 GPIO.setup(button1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(button2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -16,6 +16,10 @@ GPIO.setup(outPiFToPico, GPIO.OUT)
 GPIO.setup(inPiFromPico, GPIO.IN)
 
 GPIO.output(outPiFToPico, GPIO.LOW)  # Ensure output is LOW to start
+
+#setup led
+GPIO.setup(ledOnPi, GPIO.OUT)
+GPIO.setup(ledOnPi, GPIO.LOW) # start with led off
 
 print("Pi is running. Press buttons to send signals to Pico.")
 print("Listening for signals from Pico...")
@@ -38,6 +42,9 @@ try:
         # Check for incoming signal from Pico
         if GPIO.input(inPiFromPico) == GPIO.HIGH:
             print("Pi: Received signal from Pico!")
+            GPIO.output(ledOnPi, GPIO.HIGH)
+        else:
+            GPIO.output(ledOnPi, GPIO.HIGH)
 
         sleep(0.1)  # Small delay to avoid spamming the CPU
 except KeyboardInterrupt:
