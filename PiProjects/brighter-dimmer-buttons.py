@@ -27,7 +27,7 @@ try:
         if lightValue < 0:
             lightValue = 1
         if lightValueOld != lightValue:                
-            myPWM.start(lightValue)
+            myPWM.ChangeDutyCycle(lightValue)
             lightValueOld = lightValue
         print(lightValue)
         #myPWM.start(10) #duty cycle in %
