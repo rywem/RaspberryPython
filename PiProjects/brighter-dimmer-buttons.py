@@ -3,15 +3,15 @@ from time import sleep
 GPIO.setmode(GPIO.BOARD)
 
 ledPin = 37
-dimmerButtonPin = 38
-brightButtonPin = 40
+dimmerButtonPin = 40
+brightButtonPin = 38
 GPIO.setup(ledPin, GPIO.OUT)
 GPIO.setup(dimmerButtonPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(brightButtonPin, GPIO.IN,pull_up_down=GPIO.PUD_UP)
 incrementValue = 15
 lightValue = 50
 lightValueOld = lightValue
-myPWM = GPIO.PWM(ledPin, 200) #frequency
+myPWM = GPIO.PWM(ledPin, 100) #frequency
 myPWM.start(lightValue)
 try:
     while True:

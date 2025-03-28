@@ -2,9 +2,10 @@ from machine import Pin, PWM
 from time import sleep
 
 # Pin definitions (use GP pin numbers)
-ledPin = PWM(Pin(28))  # GP28 corresponds to physical pin 34
-dimmerButtonPin = Pin(26, Pin.IN, Pin.PULL_UP)  # GP26 = pin 31
-brightButtonPin = Pin(27, Pin.IN, Pin.PULL_UP)  # GP27 = pin 32
+ledPin = PWM(Pin(19))  # GP28 corresponds to physical pin 34
+
+dimmerButtonPin = Pin(17, Pin.IN, Pin.PULL_UP)  # GP26 = pin 31
+brightButtonPin = Pin(16, Pin.IN, Pin.PULL_UP)  # GP27 = pin 32
 
 # Set PWM frequency
 ledPin.freq(200)
@@ -18,7 +19,14 @@ lightValueOld = lightValue
 def set_duty_cycle(pwm, percent):
     # Clamp the value between 0 and 100
     percent = max(1, min(99, percent))
+    '''
+    MicroPython's PWM duty cycle uses a 16-bit range from 0-65535
+    instead of 0-100%. So we convert the % to the equivalent value
+    50% => (50/100)*65535 = 32767.5 => 32767
+    25% => 16383, 75% => 491511 etc
+    '''
     duty = int((percent / 100) * 65535)
+    # Sets the PWM duty cycle to the calculated value
     pwm.duty_u16(duty)
 
 # Initialize with initial brightness
