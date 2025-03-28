@@ -1,37 +1,45 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
-# Use physical pin numbering
 GPIO.setmode(GPIO.BOARD)
 
-# === Pin assignments (based on your setup) ===
-outPiToPico = 37     # GPIO 26 (output TO Pico)
+# === Pin assignments ===
+outPiFToPico = 37     # GPIO 26 (output TO Pico)
 inPiFromPico = 33     # GPIO 13 (input FROM Pico)
 button1 = 40          # GPIO 21
 button2 = 38          # GPIO 20
 
-# === Setup GPIO pins ===
+# === Setup pins ===
 GPIO.setup(button1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(button2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(outPiToPico, GPIO.OUT)
-GPIO.output(outPiToPico, GPIO.LOW) # make sure its low to start
+GPIO.setup(outPiFToPico, GPIO.OUT)
+GPIO.setup(inPiFromPico, GPIO.IN)
 
-# === Main loop ===
-print("Watching buttons. Press Ctrl+C to exit.")
+GPIO.output(outPiFToPico, GPIO.LOW)  # Ensure output is LOW to start
+
+print("Pi is running. Press buttons to send signals to Pico.")
+print("Listening for signals from Pico...")
 
 try:
     while True:
+        # Check Pi buttons and send signal to Pico
         if GPIO.input(button1) == GPIO.LOW:
-            print("Button 1 pressed! Sending signal to Pico")
-            GPIO.output(outPiToPico,GPIO.HIGH)
+            print("Pi: Button 1 pressed! Sending signal to Pico.")
+            GPIO.output(outPiFToPico, GPIO.HIGH)
             sleep(0.1)
-            GPIO.output(outPiToPico, GPIO.LOW)
+            GPIO.output(outPiFToPico, GPIO.LOW)
+
         if GPIO.input(button2) == GPIO.LOW:
-            print("Button 2 pressed! Sending Signal to Pico")
-            GPIO.output(outPiToPico,GPIO.HIGH)
+            print("Pi: Button 2 pressed! Sending signal to Pico.")
+            GPIO.output(outPiFToPico, GPIO.HIGH)
             sleep(0.1)
-            GPIO.output(outPiToPico, GPIO.LOW)
-        sleep(0.1)  # debounce time
+            GPIO.output(outPiFToPico, GPIO.LOW)
+
+        # Check for incoming signal from Pico
+        if GPIO.input(inPiFromPico) == GPIO.HIGH:
+            print("Pi: Received signal from Pico!")
+
+        sleep(0.1)  # Small delay to avoid spamming the CPU
 except KeyboardInterrupt:
     GPIO.cleanup()
-    print("Cleaned up GPIO and exited.")
+    print("GPIO cleaned up. Exiting.")
