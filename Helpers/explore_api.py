@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 print(dir(GPIO))
 
 # Get detailed help on a specific method
-help(GPIO.setmode)
+help(GPIO.RPI_INFO)
 
 '''
 ['BCM', 'BOARD', 'BOTH', 'Event', 'FALLING', 'HARD_PWM', 'HIGH', 'I2C', 'IN', 'LOW', 'OUT',
