@@ -2,10 +2,10 @@ from machine import Pin, PWM
 from time import sleep
 
 # Pin definitions (use GP pin numbers)
-ledPin = PWM(Pin(19))  # GP28 corresponds to physical pin 34
+ledPin = PWM(Pin(13))  
 
-dimmerButtonPin = Pin(17, Pin.IN, Pin.PULL_UP)  # GP26 = pin 31
-brightButtonPin = Pin(16, Pin.IN, Pin.PULL_UP)  # GP27 = pin 32
+dimmerButtonPin = Pin(17, Pin.IN, Pin.PULL_UP) 
+brightButtonPin = Pin(16, Pin.IN, Pin.PULL_UP) 
 
 # Set PWM frequency
 ledPin.freq(200)
@@ -35,9 +35,10 @@ set_duty_cycle(ledPin, lightValue)
 try:
     while True:
         if not dimmerButtonPin.value():  # active LOW
-            lightValue -= incrementValue
+            lightValue = round(lightValue / 2)
+            
         if not brightButtonPin.value():  # active LOW
-            lightValue += incrementValue
+            lightValue = round(lightValue * 2)
 
         lightValue = max(1, min(99, lightValue))  # clamp between 1 and 99
 
@@ -46,7 +47,7 @@ try:
             lightValueOld = lightValue
             print("Light value:", lightValue)
 
-        sleep(0.1)
+        sleep(0.2)
 
 except KeyboardInterrupt:
     ledPin.duty_u16(0)
