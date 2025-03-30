@@ -12,9 +12,9 @@ ledPin.freq(200)
 
 # Initial duty cycle value
 incrementValue = 15
-lightValue = 50  # in percentage
-lightValueOld = lightValue
-
+dutyCycle = 50  # in percentage
+dutyCycleOld = dutyCycle
+BP = 10
 # Helper function to set duty cycle (MicroPython uses 16-bit range)
 def set_duty_cycle(pwm, percent):
     # Clamp the value between 0 and 100
@@ -30,22 +30,23 @@ def set_duty_cycle(pwm, percent):
     pwm.duty_u16(duty)
 
 # Initialize with initial brightness
-set_duty_cycle(ledPin, lightValue)
+set_duty_cycle(ledPin, dutyCycle)
 
 try:
     while True:
         if not dimmerButtonPin.value():  # active LOW
-            lightValue = round(lightValue / 2)
-            
+            BP = BP - 1                    
         if not brightButtonPin.value():  # active LOW
-            lightValue = round(lightValue * 2)
+            BP = BP+1
+        print(BP)
+        BP = max(1, min(BP, 10))
+        dutyCycle = (1.5849)**BP            
+        dutyCycle = max(1, min(99, dutyCycle))  # clamp between 1 and 99
 
-        lightValue = max(1, min(99, lightValue))  # clamp between 1 and 99
-
-        if lightValue != lightValueOld:
-            set_duty_cycle(ledPin, lightValue)
-            lightValueOld = lightValue
-            print("Light value:", lightValue)
+        if dutyCycle != dutyCycleOld:
+            set_duty_cycle(ledPin, dutyCycle)
+            dutyCycleOld = dutyCycle
+            print("Light value:", dutyCycle)
 
         sleep(0.2)
 

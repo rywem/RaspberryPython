@@ -9,27 +9,30 @@ GPIO.setup(ledPin, GPIO.OUT)
 GPIO.setup(dimmerButtonPin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(brightButtonPin, GPIO.IN,pull_up_down=GPIO.PUD_UP)
 incrementValue = 15
-lightValue = 1
-lightValueOld = lightValue
+dutyCycle = 1
+dutyCycleOld = dutyCycle
 myPWM = GPIO.PWM(ledPin, 100) #frequency
-myPWM.start(lightValue)
+myPWM.start(dutyCycle)
+BP = 10
 try:
     while True:
         dimmerReadVal = GPIO.input(dimmerButtonPin)
         brightReadVal = GPIO.input(brightButtonPin)
         
         if dimmerReadVal == 1:
-            lightValue = lightValue / 2
+            BP=BP-1
+            dutyCycle=(1.5849)**BP
         if brightReadVal == 1:
-            lightValue = lightValue *2
-        if lightValue > 99:
-            lightValue = 99
-        if lightValue < 1:
-            lightValue = 1
-        if lightValueOld != lightValue:                
-            myPWM.ChangeDutyCycle(lightValue)
-            lightValueOld = lightValue
-        print(lightValue)
+            BP=BP+1
+            dutyCycle=(1.5849)**BP
+        if dutyCycle > 99:
+            dutyCycle = 99
+        if dutyCycle < 1:
+            dutyCycle = 1
+        if dutyCycleOld != dutyCycle:                
+            myPWM.ChangeDutyCycle(dutyCycle)
+            dutyCycleOld = dutyCycle
+        print(dutyCycle)
         #myPWM.start(10) #duty cycle in %
             
         sleep(.2)
