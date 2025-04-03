@@ -38,13 +38,8 @@ This guide explains how to wire a button to a Raspberry Pi GPIO pin using **pull
 - **Button pressed** → GPIO reads **HIGH**
 
 ### 🔌 Circuit Diagram
-GND | [Button] | GPIO17 ----///---- 3.3V 10kΩ
- GND
-  |
- [Button]
-  |
- GPIO17 ----/\/\/\---- 3.3V
-            10kΩ
+GND | [Button] | GPIO17 ----///---- 3.3V 
+[br] 10kΩ
 
 
 ### 📖 How It Works
@@ -69,8 +64,9 @@ GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 if GPIO.input(17) == GPIO.LOW:
     print("Button Pressed")
-
+```
 ### ✅ Pull-Down Example
+```
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
@@ -78,3 +74,4 @@ GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 if GPIO.input(17) == GPIO.HIGH:
     print("Button Pressed")
+```
