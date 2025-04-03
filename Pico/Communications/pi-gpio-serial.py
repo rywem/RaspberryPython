@@ -13,7 +13,7 @@ ledOnPi = 36 # GPIO 16
 GPIO.setup(button1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(button2, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(outPiFToPico, GPIO.OUT)
-GPIO.setup(inPiFromPico, GPIO.IN)
+GPIO.setup(inPiFromPico, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 GPIO.output(outPiFToPico, GPIO.LOW)  # Ensure output is LOW to start
 
@@ -44,7 +44,7 @@ try:
             print("Pi: Received signal from Pico!")
             GPIO.output(ledOnPi, GPIO.HIGH)
         else:
-            GPIO.output(ledOnPi, GPIO.HIGH)
+            GPIO.output(ledOnPi, GPIO.LOW)
 
         sleep(0.1)  # Small delay to avoid spamming the CPU
 except KeyboardInterrupt:
