@@ -28,8 +28,19 @@ GPIO.setup(bButton, GPIO.IN,  pull_up_down=GPIO.PUD_DOWN)
 try:
     
     while True:
-        redButtonVal = GPIO.input(rButton)
-        print(redButtonVal)
+        GPIO.output(rPin, False)
+        GPIO.output(gPin, False)
+        GPIO.output(bPin, False)
+        if GPIO.input(rButton) == GPIO.HIGH:
+            GPIO.output(rPin, True)
+            print("red pressed")
+        if GPIO.input(gButton) == GPIO.HIGH:
+            GPIO.output(gPin, True)
+            print("Green pressed")
+        if GPIO.input(bButton) == GPIO.HIGH:
+            GPIO.output(bPin, True)
+            print("Blue pressed")
+        
         sleep(.2)
         
 except KeyboardInterrupt:
