@@ -14,14 +14,16 @@ This guide explains how to wire a button to a Raspberry Pi GPIO pin using **pull
 
 3.3V | [Button] | GPIO17 ----///---- GND \
     10kΩ
-  
- 3.3V \
-  | \
- [Button] \
-  | \
- GPIO17 ----/\/\/\---- GND \
+<pre>  
+```
+3.3V 
+ | 
+[Button] 
+ | 
+GPIO17 ----/\/\/\---- GND 
             10kΩ
-  
+```
+</pre>  
     
 ### 📖 How It Works
 
