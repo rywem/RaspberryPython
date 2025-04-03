@@ -12,8 +12,6 @@ This guide explains how to wire a button to a Raspberry Pi GPIO pin using **pull
 
 ### 🔌 Circuit Diagram
 
-3.3V | [Button] | GPIO17 ----///---- GND \
-    10kΩ
 <pre>  
 3.3V 
  | 
@@ -39,9 +37,14 @@ GPIO17 ----/\/\/\---- GND
 - **Button pressed** → GPIO reads **HIGH**
 
 ### 🔌 Circuit Diagram
-GND | [Button] | GPIO17 ----///---- 3.3V 
-[br] 10kΩ
-
+<pre>
+ GND
+  |
+ [Button]
+  |
+ GPIO17 ----/\/\/\---- 3.3V
+            10kΩ
+</pre>
 
 ### 📖 How It Works
 
@@ -55,7 +58,7 @@ GND | [Button] | GPIO17 ----///---- 3.3V
 
 Instead of using a physical resistor, you can enable the internal pull-up or pull-down resistors in code using Python and the `RPi.GPIO` library.
 
-### ✅ Pull-Up Example
+### ✅ Pull-Up Example - Python
 
 ```python
 import RPi.GPIO as GPIO
@@ -66,7 +69,7 @@ GPIO.setup(17, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 if GPIO.input(17) == GPIO.LOW:
     print("Button Pressed")
 ```
-### ✅ Pull-Down Example
+### ✅ Pull-Down Example - Python
 ```
 import RPi.GPIO as GPIO
 
