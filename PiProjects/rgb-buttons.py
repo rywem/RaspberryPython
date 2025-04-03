@@ -16,6 +16,10 @@ GPIO.setup(rPin, GPIO.OUT)
 GPIO.setup(gPin, GPIO.OUT)
 GPIO.setup(bPin, GPIO.OUT)
 
+GPIO.output(rPin, 0)
+GPIO.output(gPin, 0)
+GPIO.output(bPin, 0)
+
 GPIO.setup(rButton, GPIO.IN,  pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(gButton, GPIO.IN,  pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(bButton, GPIO.IN,  pull_up_down=GPIO.PUD_DOWN)
