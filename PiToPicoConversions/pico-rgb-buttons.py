@@ -2,13 +2,13 @@
 from machine import Pin
 from time import sleep
 import utils
-rPin = Pin(13, Pin.OUT)
-gPin = Pin(12, Pin.OUT)
-bPin = Pin(11, Pin.OUT)
+rPin = Pin(16, Pin.OUT)
+gPin = Pin(17, Pin.OUT)
+bPin = Pin(18, Pin.OUT)
 
-rButton = Pin(18, Pin.IN, Pin.PULL_DOWN)
-gButton = Pin(19, Pin.IN, Pin.PULL_DOWN)
-bButton = Pin(20, Pin.IN, Pin.PULL_DOWN)
+rButton = Pin(19, Pin.IN, Pin.PULL_DOWN)
+gButton = Pin(20, Pin.IN, Pin.PULL_DOWN)
+bButton = Pin(21, Pin.IN, Pin.PULL_DOWN)
 
 try:
     while True:
