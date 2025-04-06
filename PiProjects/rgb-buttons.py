@@ -43,7 +43,9 @@ bDC = .9
 GPIO.output(rPin, False)
 GPIO.output(gPin, False)
 GPIO.output(bPin, False)
-
+rBP = 1
+bBP = 1
+gBP = 1
 try:
     
     while True:
