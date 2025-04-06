@@ -12,9 +12,9 @@ bButton = Pin(21, Pin.IN, Pin.PULL_DOWN)
 
 try:
     while True:
-        rPin.value(False)
-        gPin.value(False)
-        bPin.value(False)
+        #rPin.value(False)
+        #gPin.value(False)
+        #bPin.value(False)
         
         if rButton.value() == True:
             rPin.value(True)
