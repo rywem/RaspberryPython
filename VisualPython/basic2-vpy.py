@@ -1,7 +1,7 @@
-from vpython import sphere
+from vpython import sphere, color
 #print(dir(sphere))
 
-ball = sphere(radius=2, color=color.red)
+ball = sphere( radius=2, color=color.red)
 '''
 ['__class__', '__del__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__',
 '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__',

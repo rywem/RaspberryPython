@@ -1,5 +1,6 @@
 #rgb dimmer buttons
 # rgb-buttons.py
+from vpython import *
 import RPi.GPIO as GPIO
 from time import sleep
 
@@ -53,10 +54,13 @@ rPWM.start(rDutyCycle)
 gPWM.start(gDutyCycle)
 bPWM.start(bDutyCycle)
 
+sphere = sphere(color=color.white, radius = 1)
+
 excepted = False
 try:
     
     while True:
+        rate(20)
         rButState = GPIO.input(rButton)
         gButState = GPIO.input(gButton)
         bButState = GPIO.input(bButton)
@@ -77,8 +81,10 @@ try:
             bDutyCycle = bDutyCycle * 1.58
             if bDutyCycle > 99:
                 bDutyCycle = .99
+                        
             bPWM.ChangeDutyCycle(int(bDutyCycle))            
             print("Green channel registered, DC:", bDutyCycle)        
+        sphere.color = vector(rDutyCycle * 0.01, gDutyCycle * 0.01, bDutyCycle * 0.01)
         rButStateOld = rButState
         gButStateOld = gButState
         bButStateOld = bButState
@@ -88,3 +94,7 @@ except KeyboardInterrupt:
     print("cleanup complete.")
     GPIO.cleanup()
     excepted = True
+
+if excepted == False:
+    GPIO.cleanup()
+    print("cleanup complete. 2 ")
