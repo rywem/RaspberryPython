@@ -11,7 +11,7 @@
 #	*'chn' should be 0,1,2,3 represent for ch0, ch1, ch2, ch3
 #	on ADC0834
 #
-# This file should be copied to the python import directory /usr/lib/python3 (or maybe  /usr/lib/python3.11 directory?)
+# This file should be copied to the python import directory  /usr/lib/python3.11 directory
  
 import RPi.GPIO as GPIO 
 import time
