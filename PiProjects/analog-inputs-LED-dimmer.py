@@ -20,7 +20,7 @@ try:
     while True:
         analogValue = ADC0834.getResult(1) #pass channel as a parameter
         if analogValue == 0:
-            dutyCycle = 1
+            dutyCycle = 0
         else:
             dutyCycle = (analogValue/255) * 100
         rPWM.ChangeDutyCycle(dutyCycle)
