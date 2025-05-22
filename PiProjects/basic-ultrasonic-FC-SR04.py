@@ -28,8 +28,14 @@ try:
             pass
         echoStopTime = time.time()
         pingTravelTime = echoStopTime - echoStartTime
-        print(int(pingTravelTime * 1E6) )        
+        print(int(pingTravelTime * 1E6) )
+        distanceFt = 0
+        if pingTravelTime != 0:            
+            distanceCm = (pingTravelTime * 34300) / 2
+            distanceFt = (distanceCm / 2.54 / 12)
+        print(f"Distance (Ft): {distanceFt:.2f}")
         time.sleep(.2)
+        
 except KeyboardInterrupt:
     GPIO.cleanup()
     print("GPIO Cleanup complete, exiting program...")
