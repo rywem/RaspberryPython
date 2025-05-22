@@ -1,0 +1,11 @@
+Start Flask Environment (be sure to navigate to the operating directory):
+source flaskenv/bin/activate
+sudo python app.py
+
+
+SETUP Flask (new raspberry pi), create new environment
+
+sudo apt install python3-venv
+python3 -m venv flaskenv
+source flaskenv/bin/activate
+pip install flask
